@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: SmartBank Financial Health Score API
+  version: 1.0.0
+  description: Explainable financial wellness scoring API for SmartBanking Assistance.
+servers:
+  - url: http://localhost:3000
+    description: Local Next.js server
+  - url: https://your-vercel-domain.vercel.app
+    description: Production Vercel server
+paths:
+  /api/score:
+    get:
+      summary: Health check for score API
+      responses:
+        "200":
+          description: API status
+    post:
+      summary: Calculate SmartBank Financial Health Score™
+      description: Returns healthScore, category, pillarScores, risk factors, recommendations, projected improvement and confidence level.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HealthScoreInput"
+      responses:
+        "200":
+          description: Score calculation result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthScoreResult"
+        "400":
+          description: Invalid input
+components:
+  schemas:
+    Transaction:
+      type: object
+      required: [id, date, description, merchant, amount, type, category]
+      properties:
+        id:
+          type: string
+          example: tx-001
+        date:
+          type: string
+          example: "2026-03-25"
+        description:
+          type: string
+          example: Salary deposit
+        merchant:
+          type: string
+          example: Employer Payroll
+        amount:
+          type: number
+          example: 24000
+        type:
+          type: string
+          enum: [income, expense, transfer]
+        category:
+          type: string
+          enum:
+            - salary
+            - rent
+            - groceries
+            - transport
+            - utilities
+            - insurance
+            - loan_repayment
+            - credit_card_payment
+            - payday_loan
+            - subscription
+            - gambling
+            - dining
+            - entertainment
+            - shopping
+            - savings_transfer
+            - medical
+            - education
+            - bank_fees
+            - other
+        isRecurring:
+          type: boolean
+    HealthScoreInput:
+      type: object
+      required:
+        - periodStart
+        - periodEnd
+        - currency
+        - openingBalance
+        - closingBalance
+        - currentBalance
+        - emergencyFundBalance
+        - availableCreditLimit
+        - currentCreditUsed
+        - upcomingObligations
+        - transactions
+      properties:
+        userId:
+          type: string
+          format: uuid
+        periodStart:
+          type: string
+          example: "2026-01-01"
+        periodEnd:
+          type: string
+          example: "2026-03-31"
+        currency:
+          type: string
+          enum: [ZAR, USD, EUR, GBP]
+          example: ZAR
+        openingBalance:
+          type: number
+          example: 5200
+        closingBalance:
+          type: number
+          example: 4100
+        currentBalance:
+          type: number
+          example: 2900
+        emergencyFundBalance:
+          type: number
+          example: 8500
+        availableCreditLimit:
+          type: number
+          example: 25000
+        currentCreditUsed:
+          type: number
+          example: 11750
+        upcomingObligations:
+          type: number
+          example: 8400
+        transactions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Transaction"
+    HealthScoreResult:
+      type: object
+      properties:
+        healthScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 68
+        category:
+          type: string
+          enum: [Critical, Weak, Fair, Good, Excellent]
+          example: Fair
+        pillarScores:
+          type: object
+          properties:
+            incomeStability:
+              type: integer
+              example: 82
+            spendingDiscipline:
+              type: integer
+              example: 55
+            savingsStrength:
+              type: integer
+              example: 44
+            debtCreditRisk:
+              type: integer
+              example: 61
+            cashFlowResilience:
+              type: integer
+              example: 73
+        topRiskFactors:
+          type: array
+          items:
+            type: string
+        recommendedActions:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+              reason:
+                type: string
+              monthlyImpact:
+                type: number
+              projectedScoreIncrease:
+                type: number
+        projectedScoreImprovement:
+          type: number
+        confidenceLevel:
+          type: string
+          enum: [Low, Medium, High]
+        explanation:
+          type: array
+          items:
+            type: string

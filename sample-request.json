@@ -1,0 +1,24 @@
+{
+  "periodStart": "2026-01-01",
+  "periodEnd": "2026-03-31",
+  "currency": "ZAR",
+  "openingBalance": 5200,
+  "closingBalance": 4100,
+  "currentBalance": 2900,
+  "emergencyFundBalance": 8500,
+  "availableCreditLimit": 25000,
+  "currentCreditUsed": 11750,
+  "upcomingObligations": 8400,
+  "transactions": [
+    { "id": "tx-001", "date": "2026-01-25", "description": "Salary deposit", "merchant": "Employer Payroll", "amount": 24000, "type": "income", "category": "salary", "isRecurring": true },
+    { "id": "tx-002", "date": "2026-02-25", "description": "Salary deposit", "merchant": "Employer Payroll", "amount": 24000, "type": "income", "category": "salary", "isRecurring": true },
+    { "id": "tx-003", "date": "2026-03-26", "description": "Salary deposit", "merchant": "Employer Payroll", "amount": 23200, "type": "income", "category": "salary", "isRecurring": true },
+    { "id": "tx-004", "date": "2026-01-01", "description": "Rent debit order", "merchant": "Landlord", "amount": -7400, "type": "expense", "category": "rent", "isRecurring": true },
+    { "id": "tx-005", "date": "2026-02-01", "description": "Rent debit order", "merchant": "Landlord", "amount": -7400, "type": "expense", "category": "rent", "isRecurring": true },
+    { "id": "tx-006", "date": "2026-03-01", "description": "Rent debit order", "merchant": "Landlord", "amount": -7400, "type": "expense", "category": "rent", "isRecurring": true },
+    { "id": "tx-007", "date": "2026-03-09", "description": "Unused gym subscription", "merchant": "Gym Club", "amount": -450, "type": "expense", "category": "subscription", "isRecurring": true },
+    { "id": "tx-008", "date": "2026-03-17", "description": "Online betting", "merchant": "Betting Merchant", "amount": -950, "type": "expense", "category": "gambling" },
+    { "id": "tx-009", "date": "2026-03-05", "description": "Vehicle finance repayment", "merchant": "Bank Auto Finance", "amount": -4600, "type": "expense", "category": "loan_repayment", "isRecurring": true },
+    { "id": "tx-010", "date": "2026-03-15", "description": "Savings transfer", "merchant": "SmartBank Savings Pocket", "amount": -800, "type": "transfer", "category": "savings_transfer", "isRecurring": true }
+  ]
+}
